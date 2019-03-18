@@ -14,12 +14,12 @@ import (
 	"go.mongodb.org/mongo-driver/x/bsonx"
 )
 
-const dbname string = "bearchild"                // database name
-const collectionRecord string = "record"         // lv, score record collection name
-const collectionPlayer string = "player"         // player collection name
-const dbuser string = "root"                     // database username
-const dbpw string = "88888888"                   // database password
-const dburl string = "mongodb://localhost:27017" // database url
+const dbname string = "bearchild"            // database name
+const collectionRecord string = "record"     // lv, score record collection name
+const collectionPlayer string = "player"     // player collection name
+const dbuser string = "root"                 // database username
+const dbpw string = "88888888"               // database password
+const dburl string = "mongodb://mongo:27017" // database url
 
 var client *mongo.Client
 
@@ -44,6 +44,7 @@ func Connect() error {
 }
 
 func Ping() error {
+	log.Println("ping url", dburl)
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
 	err := client.Ping(ctx, readpref.Primary())

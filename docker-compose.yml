@@ -1,0 +1,27 @@
+version: "3"
+services:
+  bearchild:
+    image: stephenwu2019/bearchild:latest
+    ports:
+      - "3005:80"
+    restart: always
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    networks:
+      - webnet
+  mongo:
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - /private/dockervol/mongo:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 88888888
+    networks:
+      - webnet
+networks:
+  webnet:
